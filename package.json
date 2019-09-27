@@ -1,0 +1,32 @@
+{
+  "name": "node-keybase",
+  "version": "1.0.0",
+  "description": "A client SDK for keybase.io",
+  "main": "src/index.js",
+  "scripts": {
+    "docs": "jsdoc -r src -c jsdoc.json",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/felixfong227/node-keybase.git"
+  },
+  "keywords": [
+    "keybase"
+  ],
+  "author": "Felix Fong <moongod101@hotmail.com> (https://felixfong227.me)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/felixfong227/node-keybase/issues"
+  },
+  "homepage": "https://github.com/felixfong227/node-keybase#readme",
+  "dependencies": {
+    "got": "^9.6.0"
+  },
+  "devDependencies": {
+    "jest": "^24.9.0"
+  },
+  "jest": {
+    "verbose": true
+  }
+}
