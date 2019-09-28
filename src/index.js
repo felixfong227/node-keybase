@@ -22,10 +22,12 @@ module.exports = userArgument => {
     options = Object.assign(options, internal);
 
     const User = require('./Methods/User/index');
+    const Login = require('./Methods/Login');
     
     return Object.assign(
         {},
         User(options),
+        Login(options),
     );
     
 }
