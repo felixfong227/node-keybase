@@ -15,7 +15,11 @@ const StatusCheck = require('../../Utils/StatusCheck');
  */
 
 /**
- * @typedef {Object[]} them
+ * @typedef {them[]} themArray
+ */
+
+/**
+ * @typedef {Object} them
  * 
  * @property {String} them[].id - The unique UID of this Keybase user
  * 
@@ -112,27 +116,42 @@ const StatusCheck = require('../../Utils/StatusCheck');
  * @property {Object[]} them[].devices
  */
 
-module.exports = (names, options) => GetUser(names, options);
+module.exports = options => ({
+    /**
+     * @param {string} name A single name or an array of names
+     * @returns {Promise<them>}
+     */
+    ByName: name => GetUser(name, 'username', options),
+    /**
+     * @param {Array} names A single name or an array of names
+     * @returns {Promise<themArray>}
+     */
+    ByNames: names => GetUser(names, 'usernames', options),
+    /**
+     * @param {Array} domainName Domain name
+     * @returns {Promise<them>}
+     */
+    ByDomain: domainName => GetUser(domainName, 'domain', options),
+})
 
-/**
- * Get detail informations about one single or mutiple users
- * @param {string|Array} names A single name or an array of names
- * @returns {Promise<them>}
- */
-function GetUser (names, options) {
+
+function GetUser (userNames, method='username', options) {
     return new Promise(async (resolve, reject) => {
-        let userNames = [];
-        if (typeof names === 'string') {
-            userNames = [names];
-        } else if (Array.isArray(names)) {
-            userNames = names;
+        // let userNames = [];
+
+        // if (userNames.length <= 0) return reject('Empty target user(s) is not allowed');
+        
+        let argument;
+        
+        if(method === 'users') {
+            argument = userNames.join(',');
         } else {
-            return reject('Expecting argument "names" to be either a string or a list of name(array)');
+            argument = userNames;
         }
+        
+        const URL = `${options._internal.endpoints.versionFormatted}/user/lookup.json?${method}=${argument}`;
 
-        if (userNames.length <= 0) return reject('Emtpy target user(s) is not allowed');
-
-        const respond = await got(`${options._internal.endpoints.versionFormatted}/user/lookup.json?usernames=${userNames.join(',')}`, {
+        const respond = await got(URL, {
             throwHttpErrors: false,
             json: true
         });
