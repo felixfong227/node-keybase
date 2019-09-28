@@ -24,6 +24,7 @@
     "got": "^9.6.0"
   },
   "devDependencies": {
+    "@types/jest": "^24.0.18",
     "jest": "^24.9.0"
   },
   "jest": {
