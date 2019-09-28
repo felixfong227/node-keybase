@@ -7,8 +7,7 @@
 ```javascript
 const KB = require('node-keybase');
 (async () => {
-    const them = await KB().User().GetUser('felixfong227');
-    const me = them[0];
+    const me = await KB().User().GetUser().ByName('felixfong227');
     console.log(`Hello my name is ${me.profile.full_name}`);
     // #=> Hello my name is Felix Fong
 })().catch(err => console.error(err));
