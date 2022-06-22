@@ -21,7 +21,7 @@
   },
   "homepage": "https://github.com/felixfong227/node-keybase#readme",
   "dependencies": {
-    "got": "^9.6.0"
+    "got": "^11.8.5"
   },
   "devDependencies": {
     "@types/jest": "^24.0.18",
